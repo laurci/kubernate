@@ -73,7 +73,9 @@ async function main() {
         });
     }
 
-    const kubernetesReleaseTags = Object.keys(kubernetesReleases).sort((a, b) => semver.compare(a, b));
+    const kubernetesReleaseTags = Object.keys(kubernetesReleases).sort((a, b) =>
+        semver.compare(kubernetesReleases[a].version, kubernetesReleases[b].version)
+    );
 
     for (let kubernetesReleaseTag of kubernetesReleaseTags) {
         const kubernetesRelease = kubernetesReleases[kubernetesReleaseTag];
