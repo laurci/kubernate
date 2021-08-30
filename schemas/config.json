@@ -1,0 +1,54 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "ConfigOutputs": {
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "schemas": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "code",
+                "schemas"
+            ],
+            "type": "object"
+        }
+    },
+    "properties": {
+        "resources": {
+            "properties": {
+                "contributors": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "entry": {
+                    "type": "string"
+                },
+                "output": {
+                    "$ref": "#/definitions/ConfigOutputs"
+                }
+            },
+            "required": [
+                "entry",
+                "output"
+            ],
+            "type": "object"
+        },
+        "targetVersion": {
+            "enum": [
+                "v1"
+            ],
+            "type": "string"
+        }
+    },
+    "required": [
+        "targetVersion"
+    ],
+    "type": "object"
+}
+
