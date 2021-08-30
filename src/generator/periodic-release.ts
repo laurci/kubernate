@@ -1,6 +1,7 @@
 import {Octokit} from "@octokit/rest";
 import semver, {SemVer} from "semver";
 import {exec, cd} from "shelljs";
+import * as fs from "fs";
 
 const octokit = new Octokit({auth: process.env.GITHUB_TOKEN});
 
@@ -35,6 +36,8 @@ async function getReleaseBuckets(owner: string, repo: string) {
 }
 
 async function main() {
+    console.log(process.env.NPM_RC);
+
     const kubernetesReleases = await getReleaseBuckets("kubernetes", "kubernetes");
     const kubernateReleases = await getReleaseBuckets("laurci", "kubernate");
 
@@ -55,7 +58,9 @@ async function main() {
             `yarn run schema:generate ${kubernetesRelease.version.major}.${kubernetesRelease.version.minor}.${kubernetesRelease.version.patch}`
         );
         sh(`KUBERNATE_VERSION="${nextKubernateVersion}" yarn run build`);
+        fs.writeFileSync("dist/.npmrc", process.env.NPM_RC ?? "");
         cd("dist");
+        sh("cat .npmrc");
         sh("npm publish");
         cd("..");
         sh(`yarn run clean`);

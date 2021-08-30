@@ -10,8 +10,6 @@ jobs:
             - uses: actions/checkout@v2
             # - run: rm .npmrc
             - uses: actions/setup-node@v2
-              env:
-                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
               with:
                   node-version: "14.x"
                   registry-url: "https://registry.npmjs.org"
@@ -19,5 +17,5 @@ jobs:
             - run: "yarn install"
             - run: "yarn run periodic-release"
               env:
-                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+                  NPM_RC: ${{ secrets.NPM_RC }}
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
