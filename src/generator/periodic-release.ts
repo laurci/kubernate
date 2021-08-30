@@ -6,6 +6,11 @@ const octokit = new Octokit({auth: process.env.GITHUB_TOKEN});
 
 const KUBERNATE_RELEASE_REGEX = /v(.+) for Kubernetes (.+)/gi;
 
+function sh(command: string) {
+    console.log(command);
+    exec(command);
+}
+
 async function getReleaseBuckets(owner: string, repo: string) {
     const releasesResponse = await octokit.rest.repos.listReleases({owner, repo, per_page: 100});
     const releases = releasesResponse.data.filter((x) => !x.prerelease && semver.satisfies(x.tag_name, ">=1.19.0"));
@@ -46,14 +51,14 @@ async function main() {
 
         console.log("will release", nextKubernateVersion, nextKubernateReleaseName);
 
-        exec(
+        sh(
             `yarn run schema:generate ${kubernetesRelease.version.major}.${kubernetesRelease.version.minor}.${kubernetesRelease.version.patch}`
         );
-        exec(`yarn run build ${nextKubernateVersion}`);
+        sh(`yarn run build ${nextKubernateVersion}`);
         cd("dist");
-        exec("npm publish");
+        sh("npm publish");
         cd("..");
-        exec(`yarn run clean`);
+        sh(`yarn run clean`);
 
         await octokit.repos.createRelease({
             owner: "laurci",
