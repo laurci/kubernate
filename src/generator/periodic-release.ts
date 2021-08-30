@@ -77,7 +77,10 @@ async function main() {
         if (!kubernateRelease) {
             await doRelease(kubernetesRelease);
         } else {
-            const [, , latestKubernetesVersionString] = KUBERNATE_RELEASE_REGEX.exec(kubernateRelease.release.name!) ?? [];
+            const kubernetesVersionString = KUBERNATE_RELEASE_REGEX.exec(kubernateRelease.release.name!) ?? [];
+            console.log(kubernetesVersionString);
+
+            const latestKubernetesVersionString = kubernetesVersionString[2];
             if (!latestKubernetesVersionString) {
                 throw new Error("Could not parse kubernetes version from Kubernate version: " + kubernateRelease.release.name);
             }
