@@ -8,14 +8,14 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
-            - run: rm .npmrc
+            # - run: rm .npmrc
             - uses: actions/setup-node@v2
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
               with:
                   node-version: "14.x"
                   registry-url: "https://registry.npmjs.org"
-            - run: cat ~/.npmrc
+            - run: cat .npmrc
             - run: "yarn install"
             - run: "yarn run periodic-release"
               env:
