@@ -2,7 +2,6 @@ import {Project} from "ts-morph";
 import openapiToTs from "openapi-typescript";
 import {join as pathJoin} from "path";
 import {writeFileSync} from "fs";
-import {KUBE_VERSION} from "../version";
 
 type Method = string | MethodMap;
 type MethodMap = {[key: string]: Method};
@@ -58,8 +57,11 @@ function renderDefinitionsAliasMap(map: DefinitionsAliasMap) {
 }
 
 async function main() {
+    const KUBE_VERSION = process.argv.pop();
+    console.log("Running generator for Kubernetes version " + KUBE_VERSION);
+
     const output = await openapiToTs(
-        `https://raw.githubusercontent.com/kubernetes/kubernetes/${KUBE_VERSION}/api/openapi-spec/swagger.json`
+        `https://raw.githubusercontent.com/kubernetes/kubernetes/v${KUBE_VERSION}/api/openapi-spec/swagger.json`
     );
 
     writeFileSync(pathJoin(__dirname, "../__generated__/_schema.ts"), output);
@@ -84,7 +86,7 @@ async function main() {
         }
 
         definitionsAliasMap[name.replace("io.k8s.api.", "")] = `defs["${name}"]`;
-        
+
         const methodComponents = name.replace("io.k8s.api.", "").split(".");
         const methodName = methodComponents[methodComponents.length - 1];
 
@@ -125,4 +127,4 @@ ${renderMethodMap("api", methodsMap, 1)}
     );
 }
 
-main();
+main().catch(console.error);

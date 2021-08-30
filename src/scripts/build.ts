@@ -4,8 +4,10 @@ const packageJson = require("../../package.json");
 const rimraf = require("rimraf");
 
 const preparePackage = (input: any) => {
+    const VERSION = process.argv.pop();
     return {
         ...input,
+        version: VERSION,
         main: "index.js",
         types: "index.d.ts",
         devDependencies: undefined,
