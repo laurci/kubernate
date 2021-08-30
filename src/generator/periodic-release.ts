@@ -54,7 +54,7 @@ async function main() {
         sh(
             `yarn run schema:generate ${kubernetesRelease.version.major}.${kubernetesRelease.version.minor}.${kubernetesRelease.version.patch}`
         );
-        sh(`yarn run build ${nextKubernateVersion}`);
+        sh(`KUBERNATE_VERSION="${nextKubernateVersion}" yarn run build`);
         cd("dist");
         sh("npm publish");
         cd("..");

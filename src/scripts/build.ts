@@ -4,7 +4,7 @@ const packageJson = require("../../package.json");
 const rimraf = require("rimraf");
 
 const preparePackage = (input: any) => {
-    const VERSION = process.argv.pop();
+    const VERSION = process.env["KUBERNATE_VERSION"] ?? process.argv.pop();
     return {
         ...input,
         version: VERSION,
