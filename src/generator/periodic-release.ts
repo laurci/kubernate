@@ -36,8 +36,6 @@ async function getReleaseBuckets(owner: string, repo: string) {
 }
 
 async function main() {
-    console.log(process.env.NPM_RC);
-
     const kubernetesReleases = await getReleaseBuckets("kubernetes", "kubernetes");
     const kubernateReleases = await getReleaseBuckets("laurci", "kubernate");
 
@@ -60,7 +58,7 @@ async function main() {
         sh(`KUBERNATE_VERSION="${nextKubernateVersion}" yarn run build`);
         fs.writeFileSync("dist/.npmrc", process.env.NPM_RC ?? "");
         cd("dist");
-        sh("npm publish --registry https://registry.npmjs.org");
+        sh("npm publish --registry https://registry.npmjs.org --allow-republish");
         cd("..");
         sh(`yarn run clean`);
 
