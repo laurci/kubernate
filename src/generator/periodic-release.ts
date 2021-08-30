@@ -60,8 +60,7 @@ async function main() {
         sh(`KUBERNATE_VERSION="${nextKubernateVersion}" yarn run build`);
         fs.writeFileSync("dist/.npmrc", process.env.NPM_RC ?? "");
         cd("dist");
-        sh("cat .npmrc");
-        sh("npm publish");
+        sh("npm publish --registry https://registry.npmjs.org");
         cd("..");
         sh(`yarn run clean`);
 
