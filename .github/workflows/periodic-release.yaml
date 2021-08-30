@@ -1,7 +1,8 @@
 name: "Periodic release"
 on:
     schedule:
-        - cron: "0/5 * * * *"
+        - cron: "5 * * * *"
+    workflow_dispatch:
 jobs:
     release:
         runs-on: ubuntu-latest
