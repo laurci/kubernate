@@ -6,7 +6,9 @@
     "license": "MIT",
     "description": "Generate Kubernetes YAMLs with code instead of templates.",
     "homepage": "https://kubernate.dev",
+    "readme": "README.md",
     "files": [
+        "README.md",
         "dist/**.js",
         "dist/**.d.ts"
     ],

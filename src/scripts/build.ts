@@ -2,6 +2,7 @@ import {writeFileSync} from "fs";
 import {join as pathJoin} from "path";
 const packageJson = require("../../package.json");
 const rimraf = require("rimraf");
+import {cp} from "shelljs";
 
 const preparePackage = (input: any) => {
     const VERSION = process.env["KUBERNATE_VERSION"] ?? process.argv.pop();
@@ -20,6 +21,7 @@ const preparePackage = (input: any) => {
 };
 
 writeFileSync(pathJoin(__dirname, "../../dist/package.json"), JSON.stringify(preparePackage(packageJson), null, 4));
+cp("README.md", "dist/README.md");
 rimraf("dist/scripts", () => {});
 rimraf("dist/generator", () => {});
 rimraf("dist/**.d.ts.map", () => {});
