@@ -1,0 +1,17 @@
+name: "Manual release"
+on:
+    workflow_dispatch:
+jobs:
+    release:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v2
+              with:
+                  node-version: "14.x"
+                  registry-url: "https://registry.npmjs.org"
+            - run: "yarn install"
+            - run: "yarn run release"
+              env:
+                  NPM_RC: ${{ secrets.NPM_RC }}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

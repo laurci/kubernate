@@ -34,6 +34,8 @@ async function getReleaseBuckets(owner: string, repo: string) {
 }
 
 async function main() {
+    const forceRelease = process.argv.includes("--force");
+
     const kubernetesReleases = await getReleaseBuckets("kubernetes", "kubernetes");
     const kubernateReleases = await getReleaseBuckets("laurci", "kubernate");
 
@@ -54,10 +56,17 @@ async function main() {
             `yarn run schema:generate ${kubernetesRelease.version.major}.${kubernetesRelease.version.minor}.${kubernetesRelease.version.patch}`
         );
         sh(`KUBERNATE_VERSION="${nextKubernateVersion}" yarn run build`);
+
         fs.writeFileSync("dist/.npmrc", (process.env.NPM_RC ?? "").replace("GITHUB_TOKEN", process.env.GITHUB_TOKEN!));
+
         cd("dist");
         sh("npm publish --registry https://registry.npmjs.org --allow-republish");
-        sh("npm publish --scope=@laurci --registry=https://npm.pkg.github.com --allow-republish");
+
+        let packageJson = JSON.parse(fs.readFileSync("dist/package.json", "utf8"));
+        packageJson.name = "@laurci/kubernate";
+        fs.writeFileSync("dist/package.json", JSON.stringify(packageJson, null, 4));
+        sh("npm publish --registry=https://npm.pkg.github.com --allow-republish");
+
         cd("..");
         sh(`yarn run clean`);
 
@@ -94,7 +103,7 @@ async function main() {
                 throw new Error("Could not parse kubernetes version from Kubernate version: " + kubernateRelease.release.name);
             }
 
-            if (semver.gt(kubernetesRelease.version, latestKubernetesVersion)) {
+            if (semver.gt(kubernetesRelease.version, latestKubernetesVersion) || forceRelease) {
                 await doRelease(kubernetesRelease, kubernateRelease);
             }
         }
