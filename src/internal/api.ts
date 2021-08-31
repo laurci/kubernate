@@ -1,5 +1,9 @@
 import {makeLogger} from "../log";
 import cache, {ResourcesBundle} from "../output/cache";
+import {glob} from "glob";
+import {parseAllDocuments} from "yaml";
+import * as fs from "fs";
+import config from "../cli/config";
 
 export type ApiCallOptions = {bundle?: ResourcesBundle};
 export type ApiCallMethod<T> = (input: Omit<T, "apiVersion" | "kind" | "status">, options?: ApiCallOptions) => Omit<T, "status">;
@@ -24,4 +28,42 @@ export const apiCallMethod = <T>(apiName: string): ApiCallMethod<T> => {
         }
         return resource;
     }.bind({});
+};
+
+export type ResourceBrowserInfo = {
+    fileInfo: {
+        path: string;
+    };
+};
+
+export const makeResourcesBrowser = <T>(
+    rootPath: string
+): (<TResources extends keyof T>(resource: TResources, filter?: string) => (T[TResources] & ResourceBrowserInfo)[]) => {
+    let resourceCache: {[key: string]: any[]} = {};
+    let resources: {content: any; path: string}[] | undefined = undefined;
+
+    return ((resourceType: string) => {
+        if (!resources) {
+            resources = [];
+
+            const resourcePaths = glob.sync(`${rootPath}/${config.resources?.include ?? "**/*.yaml"}`, {
+                ignore: (config.resources?.exclude ?? []).map((x) => `${rootPath}/${x}`),
+            });
+
+            for (let resourcePath of resourcePaths) {
+                const yaml = parseAllDocuments(fs.readFileSync(resourcePath, "utf8"));
+                for (let resource of yaml) {
+                    resources.push({content: resource.toJSON(), path: resourcePath});
+                }
+            }
+        }
+
+        if (!resourceCache[resourceType]) {
+            resourceCache[resourceType] = resources
+                .filter((resource) => `${resource.content.apiVersion}/${resource.content.kind}` == resourceType)
+                .map((x) => ({...x.content, fileInfo: {path: x.path}}));
+        }
+
+        return resourceCache[resourceType];
+    }) as any;
 };

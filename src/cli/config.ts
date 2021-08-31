@@ -11,6 +11,8 @@ export interface ConfigOutputs {
 export interface Config {
     targetVersion: "v1";
     resources?: {
+        include?: string;
+        exclude?: string[];
         output: ConfigOutputs;
         entry: string;
         contributors?: string[];

@@ -29,6 +29,15 @@
                 "entry": {
                     "type": "string"
                 },
+                "exclude": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "include": {
+                    "type": "string"
+                },
                 "output": {
                     "$ref": "#/definitions/ConfigOutputs"
                 }
