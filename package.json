@@ -8,6 +8,10 @@
         "dist/**.js",
         "dist/**.d.ts"
     ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/laurci/kubernate"
+    },
     "bin": {
         "kubernate": "./dist/cli/bin.js"
     },
@@ -21,7 +25,8 @@
         "clean": "rimraf dist",
         "clean:incremental": "rimraf dist/tsconfig.tsbuildinfo",
         "format": "prettier --write .",
-        "periodic-release": "ts-node src/generator/periodic-release.ts"
+        "periodic-release": "ts-node src/generator/periodic-release.ts",
+        "release": "ts-node src/generator/periodic-release.ts"
     },
     "dependencies": {
         "cosmiconfig": "^7.0.1",
