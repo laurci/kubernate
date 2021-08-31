@@ -57,6 +57,8 @@ async function main() {
         );
         sh(`KUBERNATE_VERSION="${nextKubernateVersion}" yarn run build`);
 
+        sh(`yarn config:generate`);
+
         fs.writeFileSync("dist/.npmrc", (process.env.NPM_RC ?? "").replace("GITHUB_TOKEN", process.env.GITHUB_TOKEN!));
 
         cd("dist");

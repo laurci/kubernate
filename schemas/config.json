@@ -62,7 +62,6 @@
         }
     },
     "required": [
-        "scripts",
         "targetVersion"
     ],
     "type": "object"
