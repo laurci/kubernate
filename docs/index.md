@@ -33,3 +33,9 @@ It is a bit of both :) **Kubernate** is a library that is used to generate Kuber
 There is no programming model to speak of :) just write code and use it. At the end the tool runs the code :) You can even skip this step and just build the Typescript into javascript and run it with Node. You can even make your own app on top of Kubernate to manage your deployments.
 
 The library itself is very simple and it is also very fast. It is written in Typescript and it is very easy to use. It is also very easy to learn and understand. Everything is typed! Just follow the intellisense.
+
+## Compatibility with other tools
+
+Nothing stops you from using Kubernate with other tools. You can even use Kubernate as a library to generate Kubernetes YAML files for other tools (like Helm and Kustomize).
+
+I actually use it to generate the base for Kustomize (better integration comming soon) and i love it :) I just have to write the overlays but that could also be generated.
