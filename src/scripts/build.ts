@@ -21,5 +21,6 @@ const preparePackage = (input: any) => {
 
 writeFileSync(pathJoin(__dirname, "../../dist/package.json"), JSON.stringify(preparePackage(packageJson), null, 4));
 rimraf("dist/scripts", () => {});
+rimraf("dist/generator", () => {});
 rimraf("dist/**.d.ts.map", () => {});
 rimraf("dist/tsconfig.tsbuildinfo", () => {});
