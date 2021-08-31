@@ -20,7 +20,7 @@ Awesome, right? Yes and no. With Helm the problem of text manipulation is solved
 
 Yes :) I actually used Pulumi in a project to manage a development Kubernetes cluster. It is a great infra-as-code tool, but it has a few problems when it comes to managing Kubernetes resources:
 
--   It tries to manage it's own state on top of the Kubernetes (which is also declarative). This is not very useful for most of the time. Also sometimes the state of the cluster gets out of sync with the state of the Stack.
+-   It tries to manage it's own state on top of Kubernetes (which is also declarative). This is not very useful for most of the time. Also sometimes the state of the cluster gets out of sync with the state of the Stack.
 -   It becomes very slow when you have a lot of resources (this happened to me because i was managing a development cluster with feature-branch preview environments).
 -   The programming model is not very intuitive. It is async and declarative at the same time, a bit weird...; and also very OOP (which is something i personally don't like, but let's not get into that talk :]).
 
