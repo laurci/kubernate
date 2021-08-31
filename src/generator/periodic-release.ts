@@ -5,8 +5,6 @@ import * as fs from "fs";
 
 const octokit = new Octokit({auth: process.env.GITHUB_TOKEN});
 
-const KUBERNATE_RELEASE_REGEX = /v(.+) for Kubernetes (.+)/gi;
-
 function sh(command: string) {
     console.log(command);
     exec(command);
@@ -56,9 +54,10 @@ async function main() {
             `yarn run schema:generate ${kubernetesRelease.version.major}.${kubernetesRelease.version.minor}.${kubernetesRelease.version.patch}`
         );
         sh(`KUBERNATE_VERSION="${nextKubernateVersion}" yarn run build`);
-        fs.writeFileSync("dist/.npmrc", process.env.NPM_RC ?? "");
+        fs.writeFileSync("dist/.npmrc", (process.env.NPM_RC ?? "").replace("GITHUB_TOKEN", process.env.GITHUB_TOKEN!));
         cd("dist");
         sh("npm publish --registry https://registry.npmjs.org --allow-republish");
+        sh("npm publish --scope=@laurci --registry=https://npm.pkg.github.com --allow-republish");
         cd("..");
         sh(`yarn run clean`);
 
@@ -81,7 +80,7 @@ async function main() {
         if (!kubernateRelease) {
             await doRelease(kubernetesRelease);
         } else {
-            const kubernetesVersionString = KUBERNATE_RELEASE_REGEX.exec(kubernateRelease.release.name!) ?? [];
+            const kubernetesVersionString = /v(.+) for Kubernetes (.+)/gi.exec(kubernateRelease.release.name!) ?? [];
             console.log(kubernetesVersionString);
 
             const latestKubernetesVersionString = kubernetesVersionString[2];
