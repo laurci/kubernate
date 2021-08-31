@@ -2,7 +2,7 @@
 
 Kubernate is a Kubernetes YAML generator that can be used as an alternative to other popular tools like Helm. Kubernate is distributed as a library and as a CLI, both working toghether to achieve one goal: Kubernetes as Code.
 
-[The kubernate homepage](https://kubernate.dev) is a great place to get more information. Also checkout the [getting started guide](/getting-started) for a quick intro in how Kubernate works.
+Checkout the [getting started guide](/getting-started) for a quick intro in how Kubernate works.
 
 The official package is available on [NPM](https://npmjs.org/kubernate) but also on [GitHub packages](https://github.com/laurci/kubernate/packages/963222).
 
@@ -39,3 +39,7 @@ The library itself is very simple and it is also very fast. It is written in Typ
 Nothing stops you from using Kubernate with other tools. You can even use Kubernate as a library to generate Kubernetes YAML files for other tools (like Helm and Kustomize).
 
 I actually use it to generate the base for Kustomize (better integration comming soon) and i love it :) I just have to write the overlays but that could also be generated.
+
+## Let's go!
+
+[Here](/getting-started) is a getting started guide for Kubernate, and [here](/basics/kubernaterc) you can explore the basics. You can also check out the [examples](https://github.com/laurci/kubernate-examples) for more code.
