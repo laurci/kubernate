@@ -26,7 +26,7 @@
         "clean:incremental": "rimraf dist/tsconfig.tsbuildinfo",
         "format": "prettier --write .",
         "periodic-release": "ts-node src/generator/periodic-release.ts",
-        "release": "ts-node src/generator/periodic-release.ts"
+        "release": "ts-node src/generator/periodic-release.ts --force"
     },
     "dependencies": {
         "cosmiconfig": "^7.0.1",
