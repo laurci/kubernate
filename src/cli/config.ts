@@ -10,6 +10,9 @@ export interface ConfigOutputs {
 
 export interface Config {
     targetVersion: "v1";
+    scripts?: {
+        [name: string]: string;
+    };
     resources?: {
         include?: string;
         exclude?: string[];

@@ -48,6 +48,12 @@
             ],
             "type": "object"
         },
+        "scripts": {
+            "additionalProperties": {
+                "type": "string"
+            },
+            "type": "object"
+        },
         "targetVersion": {
             "enum": [
                 "v1"
@@ -56,6 +62,7 @@
         }
     },
     "required": [
+        "scripts",
         "targetVersion"
     ],
     "type": "object"
