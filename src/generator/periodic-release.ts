@@ -90,7 +90,6 @@ async function main() {
             await doRelease(kubernetesRelease);
         } else {
             const kubernetesVersionString = /v(.+) for Kubernetes (.+)/gi.exec(kubernateRelease.release.name!) ?? [];
-            console.log(kubernetesVersionString);
 
             const latestKubernetesVersionString = kubernetesVersionString[2];
             if (!latestKubernetesVersionString) {
