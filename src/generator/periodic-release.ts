@@ -62,9 +62,9 @@ async function main() {
         cd("dist");
         sh("npm publish --registry https://registry.npmjs.org --allow-republish");
 
-        let packageJson = JSON.parse(fs.readFileSync("dist/package.json", "utf8"));
+        let packageJson = JSON.parse(fs.readFileSync("package.json", "utf8"));
         packageJson.name = "@laurci/kubernate";
-        fs.writeFileSync("dist/package.json", JSON.stringify(packageJson, null, 4));
+        fs.writeFileSync("package.json", JSON.stringify(packageJson, null, 4));
         sh("npm publish --registry=https://npm.pkg.github.com --allow-republish");
 
         cd("..");
