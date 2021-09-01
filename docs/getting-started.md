@@ -1,3 +1,3 @@
 ## Getting started
 
-This is a getting started guide!
+This is the getting started guide!
