@@ -23,17 +23,12 @@ export interface Config {
 }
 
 const configLoader = cosmiconfigSync("kubernate").search();
-if (!configLoader || !configLoader.config) {
-    log.fatal("Could not load config file!");
-    process.exit(1);
-}
 
-if (configLoader.isEmpty) {
-    log.fatal("Config file is empty");
-    process.exit(1);
-}
-
-const config = {root: path.dirname(configLoader.filepath), filePath: configLoader.filepath, ...configLoader.config} as Config & {
+const config = {
+    root: !!configLoader?.filepath ? path.dirname(configLoader?.filepath ?? "") : "not_found",
+    filePath: configLoader?.filepath,
+    ...(configLoader?.config ?? {}),
+} as Config & {
     filePath: string;
     root: string;
 };
