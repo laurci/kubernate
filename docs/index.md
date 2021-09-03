@@ -14,7 +14,7 @@ The problem is not in Helm, but in the way Helm is used. Let's zoom out a bit. P
 
 Helm solves this using `charts`. A chart is a collection of Kubernetes resources that can be deployed as a single unit. The trick is that those resources are also templated. Helm uses a template engine to generate the YAMLs and then applies them to the cluster.
 
-Awesome, right? Yes and no. With Helm the problem of text manipulation is solved, but something is still missing. The old school bash automations had soemthing that is very hard to achieve with Helm. It is actually a script, an actual piece of code that gets executed, so you can take decisions based on inputs or outputs of other scripts, or on current state of the cluster.. heck you can even make network requests and do stuff based on the response. I think you get my point. You can't do everything with a template. Even some moderately complex stuff is pretty hard to do with Helm.
+Awesome, right? Yes and no. With Helm the problem of text manipulation is solved, but something is still missing. The old school bash automations had something that is very hard to achieve with Helm. It is actually a script, an actual piece of code that gets executed, so you can take decisions based on inputs or outputs of other scripts, or on current state of the cluster.. heck you can even make network requests and do stuff based on the response. I think you get my point. You can't do everything with a template. Even some moderately complex stuff is pretty hard to do with Helm.
 
 ## This sounds like Pulumi?
 

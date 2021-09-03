@@ -108,9 +108,14 @@ export const generateCommand = (yargs: typeof Yargs) => {
 
             const contributorsMeta = (config.resources.contributors ?? []).map((x) => {
                 try {
-                    const modulePath = fs.existsSync(path.join(config.root, x))
-                        ? path.join(config.root, x, ".kubernate/resources.meta")
-                        : require.resolve(x + "/.kubernate/resources.meta", {paths: [config.root]});
+                    const modulePath = path.join(
+                        path.dirname(
+                            fs.existsSync(path.join(config.root, x))
+                                ? path.join(config.root, x, ".kubernate/resources.meta")
+                                : require.resolve(x + "/.kubernate/resources.meta", {paths: [config.root]})
+                        ),
+                        "../"
+                    );
 
                     if (!fs.existsSync(modulePath)) {
                         log.fatal("Could not load contributor", x);
