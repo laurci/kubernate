@@ -23,6 +23,7 @@ Yes :) I actually used Pulumi in a project to manage a development Kubernetes cl
 -   It tries to manage it's own state on top of Kubernetes (which is also declarative). This is not very useful for most of the time. Also sometimes the state of the cluster gets out of sync with the state of the Stack.
 -   It becomes very slow when you have a lot of resources (this happened to me because i was managing a development cluster with feature-branch preview environments).
 -   The programming model is not very intuitive. It is async and declarative at the same time, a bit weird...; and also very OOP (which is something i personally don't like, but let's not get into that talk :]).
+-   When you deploy somehting to a kubernetes cluster, the process will wait for everthing to be well and healthy. This is generally a good thing, until you have one ImagePullBackOff that is waited for 10 minutes by all the other deployment items.
 
 Other then that, it is a great tool and a source of inspiration :)
 
