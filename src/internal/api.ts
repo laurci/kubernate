@@ -1,6 +1,7 @@
 import {makeLogger} from "../log";
 import cache, {ResourcesBundle} from "../output/cache";
 import {glob} from "glob";
+import minimatch from "minimatch";
 import {parseAllDocuments} from "yaml";
 import * as fs from "fs";
 import config from "../cli/config";
@@ -42,7 +43,7 @@ export const makeResourcesBrowser = <T>(
     let resourceCache: {[key: string]: any[]} = {};
     let resources: {content: any; path: string}[] | undefined = undefined;
 
-    return ((resourceType: string) => {
+    return ((resourceType: string, filter: string = "*") => {
         if (!resources) {
             resources = [];
 
@@ -64,6 +65,8 @@ export const makeResourcesBrowser = <T>(
                 .map((x) => ({...x.content, fileInfo: {path: x.path}}));
         }
 
-        return resourceCache[resourceType];
+        return resourceCache[resourceType].filter((x) =>
+            minimatch(`${x.metadata?.namespace ?? "default"}/${x.metadata?.name ?? "default"}`, filter)
+        );
     }) as any;
 };
