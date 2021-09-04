@@ -13,6 +13,10 @@ export interface Config {
     scripts?: {
         [name: string]: string;
     };
+    crds?: {
+        output: string;
+        list: {groupPrefix: string; name: string; path: string}[];
+    };
     resources?: {
         entryTypeName?: string;
         include?: string;

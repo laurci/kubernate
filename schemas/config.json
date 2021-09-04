@@ -18,6 +18,40 @@
         }
     },
     "properties": {
+        "crds": {
+            "properties": {
+                "list": {
+                    "items": {
+                        "properties": {
+                            "groupPrefix": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "path": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "groupPrefix",
+                            "name",
+                            "path"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "output": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "list",
+                "output"
+            ],
+            "type": "object"
+        },
         "resources": {
             "properties": {
                 "contributors": {

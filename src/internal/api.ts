@@ -6,8 +6,9 @@ import {parseAllDocuments} from "yaml";
 import * as fs from "fs";
 import config from "../cli/config";
 
-export type ApiCallOptions = {bundle?: ResourcesBundle};
+export type ApiCallOptions = {bundle?: ResourcesBundle; skipBundle?: boolean};
 export type ApiCallMethod<T> = (input: Omit<T, "apiVersion" | "kind" | "status">, options?: ApiCallOptions) => Omit<T, "status">;
+export type CRDApiCallMethod<T> = (input: T, options?: ApiCallOptions) => T;
 
 export const apiCallMethod = <T>(apiName: string): ApiCallMethod<T> => {
     const logger = makeLogger(apiName.replace("io.k8s.api.", ""));
@@ -24,9 +25,36 @@ export const apiCallMethod = <T>(apiName: string): ApiCallMethod<T> => {
 
         const resource = {apiVersion: (api == "core" ? version : `${api}/${version}`).toLowerCase(), kind, ...input};
 
-        if (!apiName.toLowerCase().includes("template")) {
+        if (!options?.skipBundle) {
+            if (options?.skipBundle == false) {
+                (options?.bundle ?? cache).addResource(resource);
+            } else if (!apiName.toLowerCase().includes("template")) {
+                (options?.bundle ?? cache).addResource(resource);
+            }
+        }
+
+        return resource;
+    }.bind({});
+};
+
+export const crdApiCallMethod = <T>(alias: string, apiName: string): CRDApiCallMethod<T> => {
+    const logger = makeLogger(alias);
+
+    return function init(input: T, options?: ApiCallOptions) {
+        const metadata = (input as any).metadata ?? {};
+        const namespace = metadata.namespace;
+        const name = metadata.name;
+
+        logger.debug(namespace, name);
+        logger.silly(input);
+
+        const [apiVersion, kind] = apiName.split("#");
+        const resource = {apiVersion, kind, ...input};
+
+        if (!options?.skipBundle) {
             (options?.bundle ?? cache).addResource(resource);
         }
+
         return resource;
     }.bind({});
 };

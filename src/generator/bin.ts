@@ -2,49 +2,12 @@ import {Project} from "ts-morph";
 import openapiToTs from "openapi-typescript";
 import {join as pathJoin} from "path";
 import {writeFileSync} from "fs";
+import {DefinitionsApiCallFormatter, DefinitionsApiTypeFormatter, MethodMap, renderMethodMap} from "../utils/method-map";
 
-type Method = string | MethodMap;
-type MethodMap = {[key: string]: Method};
 type DefinitionsAliasMap = {[key: string]: string};
 
 function exit() {
     process.exit(1);
-}
-
-function renderIndentation(indentation: number) {
-    return Array(indentation).fill("\t").join("");
-}
-
-function renderMethodMap(base: string, map: MethodMap, indents: number = 0) {
-    const indentation = renderIndentation(indents + 1);
-    let text = `${renderIndentation(indents)}${base}: {\n`;
-    const methods = Object.keys(map);
-    for (let method of methods) {
-        if (typeof map[method] == "string") {
-            text += `${indentation}${method}: apiCallMethod<defs["${map[method]}"]>("${map[method]}"),\n`;
-        } else {
-            text += `${renderMethodMap(method, map[method] as MethodMap, indents + 1)}\n`;
-        }
-    }
-    text += `${renderIndentation(indents)}},`;
-
-    return text;
-}
-
-function renderMethodMapType(base: string, map: MethodMap, indents: number = 0) {
-    const indentation = renderIndentation(indents + 1);
-    let text = `${renderIndentation(indents)}${base}: {\n`;
-    const methods = Object.keys(map);
-    for (let method of methods) {
-        if (typeof map[method] == "string") {
-            text += `${indentation}${method}: ApiCallMethod<defs["${map[method]}"]>,\n`;
-        } else {
-            text += `${renderMethodMapType(method, map[method] as MethodMap, indents + 1)}\n`;
-        }
-    }
-    text += `${renderIndentation(indents)}},`;
-
-    return text;
 }
 
 function renderDefinitionsAliasMap(map: DefinitionsAliasMap) {
@@ -117,11 +80,11 @@ ${renderDefinitionsAliasMap(definitionsAliasMap)}
 };
 
 export type DefinitionsMap = {
-${renderMethodMapType("api", methodsMap, 1)}
+${renderMethodMap("api", DefinitionsApiTypeFormatter, methodsMap, undefined, 1)}
 };
 
 export const definitions: DefinitionsMap = {
-${renderMethodMap("api", methodsMap, 1)}
+${renderMethodMap("api", DefinitionsApiCallFormatter, methodsMap, undefined, 1)}
 };
 `
     );
