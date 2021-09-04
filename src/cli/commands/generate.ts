@@ -1,7 +1,7 @@
 import type Yargs from "yargs";
 import * as fs from "fs";
 import * as path from "path";
-import {Project, InterfaceDeclaration} from "ts-morph";
+import {Project, InterfaceDeclaration, SourceFile} from "ts-morph";
 import * as TJS from "typescript-json-schema";
 import {makeLogger} from "../../log";
 import config, {Config} from "../config";
@@ -19,6 +19,16 @@ type ResourcesMeta = Config["resources"] & {
         };
     };
 };
+
+function findEntryTypeName(sourceFile: SourceFile): string {
+    const types = sourceFile.getTypeAliases();
+    for (let t of types) {
+        if (t.isExported() && t.getType().isUnion()) {
+            return t.getName();
+        }
+    }
+    throw new Error("No exported union type alias found");
+}
 
 export const generateCommand = (yargs: typeof Yargs) => {
     return yargs.command(
@@ -40,7 +50,11 @@ export const generateCommand = (yargs: typeof Yargs) => {
 
             const dependenciesMap: {[key: string]: InterfaceDeclaration} = {};
 
-            const mainType = mainSource.getTypeAliasOrThrow("Services").getType();
+            const typeAliasName = config.resources?.entryTypeName ?? findEntryTypeName(mainSource);
+
+            log.info("Using exported type", typeAliasName);
+
+            const mainType = mainSource.getTypeAliasOrThrow(typeAliasName).getType();
 
             const declaredServices = (
                 mainType.isUnion()
@@ -86,7 +100,7 @@ export const generateCommand = (yargs: typeof Yargs) => {
             const program = TJS.getProgramFromFiles(project.getSourceFiles().map((x) => x.getFilePath()));
 
             log.debug("generating schema");
-            let schema = TJS.generateSchema(program, "Services", {
+            let schema = TJS.generateSchema(program, typeAliasName, {
                 excludePrivate: true,
                 propOrder: true,
                 ignoreErrors: true,

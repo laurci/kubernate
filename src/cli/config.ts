@@ -14,6 +14,7 @@ export interface Config {
         [name: string]: string;
     };
     resources?: {
+        entryTypeName?: string;
         include?: string;
         exclude?: string[];
         output: ConfigOutputs;
