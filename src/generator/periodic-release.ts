@@ -12,7 +12,7 @@ function sh(command: string) {
 
 async function getReleaseBuckets(owner: string, repo: string) {
     const releasesResponse = await octokit.rest.repos.listReleases({owner, repo, per_page: 100});
-    const releases = releasesResponse.data.filter((x) => !x.prerelease && semver.satisfies(x.tag_name, ">=1.19.0"));
+    const releases = releasesResponse.data.filter((x) => !x.prerelease && semver.satisfies(x.tag_name, ">=1.18.0"));
 
     let releaseBuckets: {[key: string]: {version: SemVer; release: typeof releases[0]}} = {};
 
