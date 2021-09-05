@@ -77,6 +77,7 @@ export const makeResourcesBrowser = <T>(
 
             const resourcePaths = glob.sync(`${rootPath}/${config.resources?.include ?? "**/*.yaml"}`, {
                 ignore: (config.resources?.exclude ?? []).map((x) => `${rootPath}/${x}`),
+                nodir: true,
             });
 
             for (let resourcePath of resourcePaths) {
