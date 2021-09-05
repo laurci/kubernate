@@ -22,6 +22,9 @@ const preparePackage = (input: any) => {
 
 writeFileSync(pathJoin(__dirname, "../../dist/package.json"), JSON.stringify(preparePackage(packageJson), null, 4));
 cp("README.md", "dist/README.md");
+rimraf("dist/assets", () => {
+    cp("-R", "src/assets", "dist/assets");
+});
 rimraf("dist/scripts", () => {});
 rimraf("dist/generator", () => {});
 rimraf("dist/**.d.ts.map", () => {});

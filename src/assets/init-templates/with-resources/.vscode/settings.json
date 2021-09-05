@@ -1,0 +1,14 @@
+{
+    "yaml.schemas": {
+        "node_modules/kubernate/schemas/config.json": ".kubernaterc.yaml",
+        "schemas/resources.json": "[!output]**/[!.kubernaterc]*.yaml"
+    },
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        ".kubernate": true
+    }
+}

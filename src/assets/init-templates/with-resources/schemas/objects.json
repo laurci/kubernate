@@ -1,0 +1,75 @@
+{
+    "description": "This is how you can declare a resource",
+    "type": "object",
+    "properties": {
+        "apiVersion": {
+            "type": "string",
+            "enum": [
+                "demo/v1"
+            ]
+        },
+        "kind": {
+            "type": "string",
+            "enum": [
+                "HelloWorld"
+            ]
+        },
+        "metadata": {
+            "type": "object",
+            "properties": {
+                "namespace": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "annotations": {
+                    "type": "object",
+                    "additionalProperties": {},
+                    "propertyOrder": []
+                }
+            },
+            "propertyOrder": [
+                "namespace",
+                "name",
+                "annotations"
+            ],
+            "required": [
+                "name"
+            ]
+        },
+        "spec": {
+            "$ref": "#/definitions/HelloWorldServiceSpec"
+        }
+    },
+    "propertyOrder": [
+        "apiVersion",
+        "kind",
+        "metadata",
+        "spec"
+    ],
+    "required": [
+        "apiVersion",
+        "kind",
+        "metadata",
+        "spec"
+    ],
+    "definitions": {
+        "HelloWorldServiceSpec": {
+            "description": "This is the spec of our resource.",
+            "type": "object",
+            "properties": {
+                "who": {
+                    "type": "string"
+                }
+            },
+            "propertyOrder": [
+                "who"
+            ],
+            "required": [
+                "who"
+            ]
+        }
+    },
+    "$schema": "http://json-schema.org/draft-07/schema#"
+}

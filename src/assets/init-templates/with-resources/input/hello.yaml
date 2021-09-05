@@ -1,0 +1,14 @@
+# you have intellisense here. give it a try :)
+apiVersion: demo/v1
+kind: HelloWorld
+metadata:
+    name: hello-test1
+spec:
+    who: world1
+---
+apiVersion: demo/v1
+kind: HelloWorld
+metadata:
+    name: hello-test2
+spec:
+    who: world2
