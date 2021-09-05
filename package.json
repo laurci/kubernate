@@ -26,6 +26,7 @@
         "compile": "tsc",
         "compile:watch": "tsc -w",
         "build": "tsc && ts-node src/scripts/build.ts '0.0.1' && chmod +x ./dist/cli/bin.js",
+        "build:assets": "rimraf dist/assets && cp -R src/assets dist/assets",
         "clean": "rimraf dist",
         "clean:incremental": "rimraf dist/tsconfig.tsbuildinfo",
         "format": "prettier --write .",
@@ -36,6 +37,7 @@
         "cosmiconfig": "^7.0.1",
         "deepmerge": "^4.2.2",
         "glob": "^7.1.7",
+        "handlebars": "^4.7.7",
         "minimatch": "^3.0.4",
         "semver": "^7.3.5",
         "ts-morph": "^11.0.3",
@@ -49,6 +51,7 @@
     "devDependencies": {
         "@octokit/rest": "^18.9.1",
         "@types/deepmerge": "^2.2.0",
+        "@types/handlebars": "^4.1.0",
         "@types/minimatch": "^3.0.5",
         "@types/node": "^16.4.1",
         "@types/package-json": "^5.0.1",

@@ -1,0 +1,5 @@
+{
+    "yaml.schemas": {
+        "node_modules/kubernate/schemas/config.json": ".kubernaterc.yaml"
+    },
+}

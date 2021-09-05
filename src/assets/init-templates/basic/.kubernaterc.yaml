@@ -1,0 +1,3 @@
+targetVersion: "v1"
+scripts:
+    hello-world: ./src/hello-world.ts
