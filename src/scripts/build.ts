@@ -13,7 +13,7 @@ const preparePackage = (input: any) => {
         types: "index.d.ts",
         devDependencies: undefined,
         scripts: undefined,
-        files: ["*.js", "*.ts", "*.hbs", "*.yaml", "**/*.js", "**/*.json", "**/*.ts", "**/*.hbs", "**/*.yaml"],
+        files: ["*.js", "*.ts", "*.hbs", "*.yaml", "**/*.js", "**/*.json", "**/*.ts", "**/*.hbs", "**/*.yaml", "**/.empty"],
         bin: {
             kubernate: "./cli/bin.js",
         },
