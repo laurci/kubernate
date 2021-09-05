@@ -1,0 +1,12 @@
+targetVersion: "v1"
+scripts:
+    hello-world: ./src/hello-world.ts
+resources:
+    entry: ./src/resources/index.ts
+    entryTypeName: Resources # this is optional
+    exclude:
+        - output/*
+    include: input/*.yaml
+    output:
+        code: ./src/generated
+        schemas: ./schemas

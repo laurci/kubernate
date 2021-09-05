@@ -1,2 +1,4 @@
 node_modules
 src/__generated__/
+src/assets
+dist/
