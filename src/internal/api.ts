@@ -71,7 +71,7 @@ export const makeResourcesBrowser = <T>(
     let resourceCache: {[key: string]: any[]} = {};
     let resources: {content: any; path: string}[] | undefined = undefined;
 
-    return ((resourceType: string, filter: string = "*") => {
+    return ((resourceType: string, filter: string = "**") => {
         if (!resources) {
             resources = [];
 
