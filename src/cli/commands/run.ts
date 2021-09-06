@@ -19,9 +19,17 @@ export const runCommand = (name: string) => (yargs: typeof Yargs) => {
             try {
                 const script = require(path.join(config.root, config.scripts![name]));
                 log.debug("loaded", config.scripts![name]);
-                script.default().catch((ex: any) => {
-                    console.error(ex);
-                });
+                log.debug("started running", config.scripts![name]);
+                script
+                    .default()
+                    .catch((ex: any) => {
+                        console.error(ex);
+                        log.debug("finished running", config.scripts![name]);
+                        process.exit(1);
+                    })
+                    .then(() => {
+                        log.debug("finished running", config.scripts![name]);
+                    });
             } catch (ex) {
                 log.error("Failed to execute " + name, ex);
                 process.exit(1);
