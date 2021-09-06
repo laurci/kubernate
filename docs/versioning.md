@@ -1,3 +1,9 @@
+---
+layout: default
+title: Versioning
+nav_order: 5
+---
+
 ## Versioning
 
 Kubernate has a lot of components auto-generated from the Kubernetes API. This is great because it means it can always be accurate in relation to the Kubernetes API Server that you are using, but it also means that the versioning is a bit complicated.

@@ -1,3 +1,4 @@
 remote_theme: laurci/just-the-docs
 plugins:
     - jekyll-seo-tag
+ga_tracking: G-E9HQ991D31

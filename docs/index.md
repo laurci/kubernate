@@ -1,3 +1,9 @@
+---
+layout: default
+title: Introduction
+nav_order: 1
+---
+
 ## Intro
 
 Kubernate is a Kubernetes YAML generator that can be used as an alternative to other popular tools like Helm. Kubernate is distributed as a library and as a CLI, both working toghether to achieve one goal: Kubernetes as Code.
@@ -43,4 +49,4 @@ I actually use it to generate the base for Kustomize (better integration comming
 
 ## Let's go!
 
-[Here](/getting-started) is a getting started guide for Kubernate, and [here](/basics/kubernaterc) you can explore the basics. You can also check out the [examples](https://github.com/laurci/kubernate-examples) for more code.
+[Here](/getting-started) is a getting started guide for Kubernate, and [here](/basics/intro) you can explore the basics. You can also check out the [examples](https://github.com/laurci/kubernate-examples) for more code.
