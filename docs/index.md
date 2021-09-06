@@ -49,4 +49,4 @@ I actually use it to generate the base for Kustomize (better integration comming
 
 ## Let's go!
 
-[Here](/getting-started) is a getting started guide for Kubernate, and [here](/basics/intro) you can explore the basics. You can also check out the [examples](https://github.com/laurci/kubernate-examples) for more code.
+[Here](/getting-started) is a getting started guide for Kubernate, and [here](/basics) you can explore the basics. You can also check out the [examples](https://github.com/laurci/kubernate-examples) for more code.
