@@ -83,7 +83,7 @@ type defs = {
             for (let version of versions) {
                 if (!version.schema?.openAPIV3Schema) continue;
 
-                const fqdn = `${crd.name}.${groupName}.${version.name}.${resource.spec.names.kind}`;
+                const fqdn = `${crd.name}` + (groupName != "" ? `.${groupName}.` : ".") + `${version.name}.${resource.spec.names.kind}`;
 
                 log.debug(`generating crd for ${fqdn}`);
 
@@ -123,7 +123,7 @@ type defs = {
                         .trim() +
                     "\n";
 
-                const methodComponents = fqdn.split(".");
+                const methodComponents = fqdn.split(".").filter((x) => x.trim().length > 0);
                 const methodName = methodComponents[methodComponents.length - 1];
 
                 let parts = methodsMap as MethodMap;
