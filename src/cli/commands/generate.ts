@@ -59,8 +59,6 @@ async function generateCrds() {
 type defs = {
 `;
 
-    let exportsMap = ``;
-
     let methodsMap: MethodMap = {};
     let aliasMap: AliasMap = {};
 
@@ -68,7 +66,6 @@ type defs = {
     log.info("generating CRDs");
 
     for (let crd of config.crds?.list ?? []) {
-        exportsMap += `export const ${crd.name} = definitions.api.${crd.name};\n`;
         const crdPath = path.join(config.root, crd.path);
         log.info(`opening ${crdPath} as CRD document`);
         const resources = parseAllDocuments(fs.readFileSync(crdPath, "utf8")).map((x) => x.toJSON());
@@ -173,7 +170,8 @@ const definitions: DefinitionsMap = {
 ${renderMethodMap("api", CRDApiCallFormatter, methodsMap, aliasMap, 1)}
 };
 
-${exportsMap}
+const crds = definitions.api;
+export default crds;
 `.trim()
     );
 }

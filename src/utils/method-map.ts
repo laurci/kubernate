@@ -20,11 +20,11 @@ export const DefinitionsApiTypeFormatter: MethodFormatter = (base, method, map, 
 
 export function renderMethodMap(base: string, formatter: MethodFormatter, map: MethodMap, aliases?: AliasMap, indents: number = 0) {
     const indentation = renderIndentation(indents + 1);
-    let text = `${renderIndentation(indents)}${base}: {\n`;
+    let text = `${renderIndentation(indents)}"${base}": {\n`;
     const methods = Object.keys(map);
     for (let method of methods) {
         if (typeof map[method] == "string") {
-            text += `${indentation}${method}: ${formatter(base, method, map, aliases)},\n`;
+            text += `${indentation}"${method}": ${formatter(base, method, map, aliases)},\n`;
         } else {
             text += `${renderMethodMap(method, formatter, map[method] as MethodMap, aliases, indents + 1)}\n`;
         }
