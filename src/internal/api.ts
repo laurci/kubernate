@@ -21,7 +21,11 @@ export const apiCallMethod = <T>(apiName: string): ApiCallMethod<T> => {
         logger.debug(namespace, name);
         logger.silly(input);
 
-        const [api, version, kind] = apiName.replace("io.k8s.api.", "").split(".");
+        const components = apiName.replace("io.k8s.api.", "").split(".");
+
+        const kind = components[components.length - 1];
+        const version = components[components.length - 2];
+        const api = components.slice(0, components.length - 2).join(".");
 
         const resource = {apiVersion: (api == "core" ? version : `${api}/${version}`).toLowerCase(), kind, ...input};
 
