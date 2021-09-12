@@ -5,7 +5,7 @@ nav_order: 2
 parent: Helper resources
 ---
 
-## Namespace
+## The **`namespace`** resource
 
 The `namespace` resource helper is a utility for creating namespaces. It wraps a call to `kube.core.v1.Namespace(.....)`.
 
