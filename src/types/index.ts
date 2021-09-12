@@ -1,6 +1,7 @@
 import {PartialDeep} from "type-fest";
 import deepmerge from "deepmerge";
 import {DefinitionsAliasMap} from "../__generated__/definitions";
+import {ApiCallOptions} from "../internal/api";
 
 export type Definition<T extends keyof DefinitionsAliasMap> = DefinitionsAliasMap[T];
 
@@ -34,3 +35,5 @@ export type Resource<Version extends string, Kind extends string, Spec, Metadata
     metadata: Metadata;
     spec: Spec;
 };
+
+export type ResourceCallOptions = ApiCallOptions;

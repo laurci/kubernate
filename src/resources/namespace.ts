@@ -1,7 +1,7 @@
-import kube from "../index";
+import kube, {ResourceCallOptions} from "../index";
 
-const namespace = (name: string) => {
-    const resource = kube.core.v1.Namespace({metadata: {name}});
+const namespace = (name: string, options?: ResourceCallOptions) => {
+    const resource = kube.core.v1.Namespace({metadata: {name}}, options);
     return resource.metadata?.name!!;
 };
 
