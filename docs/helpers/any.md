@@ -45,3 +45,5 @@ metadata:
 spec:
     counter: 1
 ```
+
+This is very useful to create resources that are not yet supported by kubernate.
