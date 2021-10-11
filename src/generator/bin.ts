@@ -33,13 +33,17 @@ async function main() {
     const source = project.addSourceFileAtPath(pathJoin(__dirname, "../__generated__/_schema.ts"));
 
     const definitionsInterface = source.getInterface("definitions");
+    const pathsInterface = source.getInterface("paths");
 
-    if (!definitionsInterface) {
+    if (!definitionsInterface || !pathsInterface) {
         return exit();
     }
 
+    const paths = pathsInterface.getProperties().map((x) => JSON.parse(x.getName()));
+
     let methodsMap: MethodMap = {};
     let definitionsAliasMap: DefinitionsAliasMap = {};
+    const coreApis = new Set<string>();
 
     for (let definitionProperty of definitionsInterface.getProperties()) {
         const name = JSON.parse(definitionProperty.getName());
@@ -52,6 +56,11 @@ async function main() {
 
         const methodComponents = name.replace("io.k8s.api.", "").split(".");
         const methodName = methodComponents[methodComponents.length - 1];
+
+        const coreApiName = methodComponents[0];
+        if (paths.indexOf(`/apis/${coreApiName}/`) >= 0) {
+            coreApis.add(coreApiName);
+        }
 
         let parts = methodsMap as MethodMap;
         for (let component of methodComponents) {
@@ -74,6 +83,8 @@ async function main() {
         `
 import type {definitions as defs} from "./_schema";
 import {apiCallMethod, ApiCallMethod} from "../internal/api";
+
+export const coreApis = ${JSON.stringify(Array.from(coreApis))};
 
 export type DefinitionsAliasMap = {
 ${renderDefinitionsAliasMap(definitionsAliasMap)}

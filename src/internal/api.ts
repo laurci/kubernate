@@ -5,6 +5,7 @@ import minimatch from "minimatch";
 import {parseAllDocuments} from "yaml";
 import * as fs from "fs";
 import config from "../cli/config";
+import {coreApis} from "../__generated__/definitions";
 
 export type ApiCallOptions = {bundle?: ResourcesBundle; skipBundle?: boolean};
 export type ApiCallMethod<T> = (input: Omit<T, "apiVersion" | "kind" | "status">, options?: ApiCallOptions) => Omit<T, "status">;
@@ -25,7 +26,10 @@ export const apiCallMethod = <T>(apiName: string): ApiCallMethod<T> => {
 
         const kind = components[components.length - 1];
         const version = components[components.length - 2];
-        const api = components.slice(0, components.length - 2).join(".");
+        let api = components.slice(0, components.length - 2).join(".");
+        if (coreApis.indexOf(api) == -1 && api !== "core") {
+            api = `${api}.k8s.io`;
+        }
 
         const resource = {apiVersion: (api == "core" ? version : `${api}/${version}`).toLowerCase(), kind, ...input};
 
