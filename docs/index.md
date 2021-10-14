@@ -4,6 +4,8 @@ title: Introduction
 nav_order: 1
 ---
 
+![kubernate logo](https://raw.githubusercontent.com/laurci/kubernate/master/docs/assets/logo_with_text.png)
+
 ## Intro
 
 Kubernate is a Kubernetes YAML generator that can be used as an alternative to other popular tools like Helm. Kubernate is distributed as a library and as a CLI, both working toghether to achieve one goal: Kubernetes as Code.
