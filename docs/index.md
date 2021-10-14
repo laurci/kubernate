@@ -12,7 +12,7 @@ Kubernate is a Kubernetes YAML generator that can be used as an alternative to o
 
 Checkout the [getting started guide](/getting-started) for a quick intro in how Kubernate works.
 
-The official package is available on [NPM](https://npmjs.org/kubernate) but also on [GitHub packages](https://github.com/laurci/kubernate/packages/963222).
+The official package is available on [NPM](https://npmjs.org/kubernate) but also on [GitHub packages](https://github.com/laurci/kubernate/packages/963222). Make sure to read about the versioning policy before you start using Kubernate [here](/versioning.html).
 
 ## Helm sucks! We can all agree, right?
 
