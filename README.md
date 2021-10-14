@@ -2,7 +2,7 @@
 
 # Kubernetes + Generate = Kubernate❤️
 
-Kubernate is a Kubernetes YAML generator that can be used as an alternative to other popular tools like Helm. Kubernate is distributed as a library and as a CLI, both working toghether to achieve one goal: Kubernetes as Code.
+Kubernate is a Kubernetes YAML generator that can be used as an alternative to other popular tools like Helm. Kubernate is distributed as a library and as a CLI, both working together to achieve one goal: Kubernetes as Code.
 
 [The kubernate homepage](https://kubernate.dev) is a great place to get more information. Also checkout the [getting started guide](https://kubernate.dev/getting-started) for a quick intro in how Kubernate works.
 
@@ -16,15 +16,15 @@ The problem is not in Helm, but in the way Helm is used. Let's zoom out a bit. P
 
 Helm solves this using `charts`. A chart is a collection of Kubernetes resources that can be deployed as a single unit. The trick is that those resources are also templated. Helm uses a template engine to generate the YAMLs and then applies them to the cluster.
 
-Awesome, right? Yes and no. With Helm the problem of text manipulation is solved, but something is still missing. The old school bash automations had soemthing that is very hard to achieve with Helm. It is actually a script, an actual piece of code that gets executed, so you can take decisions based on inputs or outputs of other scripts, or on current state of the cluster.. heck you can even make network requests and do stuff based on the response. I think you get my point. You can't do everything with a template. Even some moderately complex stuff is pretty hard to do with Helm.
+Awesome, right? Yes and no. With Helm the problem of text manipulation is solved, but something is still missing. The old school bash automations had soemthing that is very hard to achieve with Helm. It is actually a script, an actual piece of code that gets executed, so you can take decisions based on inputs or outputs of other scripts, or on current state of the cluster ... heck you can even make network requests and do stuff based on the response. I think you get my point. You can't do everything with a template. Even some moderately complex stuff is pretty hard to do with Helm.
 
 ## This sounds like Pulumi?
 
 Yes :) I actually used Pulumi in a project to manage a development Kubernetes cluster. It is a great infra-as-code tool, but it has a few problems when it comes to managing Kubernetes resources:
 
 -   It tries to manage it's own state on top of Kubernetes (which is also declarative). This is not very useful for most of the time. Also sometimes the state of the cluster gets out of sync with the state of the Stack.
--   It becomes very slow when you have a lot of resources (this happened to me because i was managing a development cluster with feature-branch preview environments).
--   The programming model is not very intuitive. It is async and declarative at the same time, a bit weird...; and also very OOP (which is something i personally don't like, but let's not get into that talk :]).
+-   It becomes very slow when you have a lot of resources (this happened to me because I was managing a development cluster with feature-branch preview environments).
+-   The programming model is not very intuitive. It is async and declarative at the same time, a bit weird...; and also very OOP (which is something I personally don't like, but let's not get into that talk :]).
 -   When you deploy somehting to a kubernetes cluster, the process will wait for everthing to be well and healthy. This is generally a good thing, until you have one ImagePullBackOff that is waited for 10 minutes by all the other deployment items.
 
 Other then that, it is a great tool and a source of inspiration :)
