@@ -43,7 +43,6 @@ apiVersion: elasticsearch.k8s.elastic.co/v1
 kind: Elasticsearch
 metadata:
     name: elastic
-    namespace: cacat
 spec:
     version: "7.14"
     nodeSets:
