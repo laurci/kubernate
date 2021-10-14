@@ -14,3 +14,4 @@ The easiest way to add this to your shell is to run (adapt for your shell):
 ```bash
 kubernate completion >> ~/.bashrc
 ```
+

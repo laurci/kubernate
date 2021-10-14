@@ -21,7 +21,7 @@ Kubernate doesn't enforce any programming model. It's up to you to decide what y
 
 ## Kubernate scripts
 
-You can use Kubernate in any node (>=14.x) runtime, you can use `ts-node` to run the program or you can use `tsc` to compile the program to JavaScript and then run it with node. You can even bundle the project using somthing like `Webpack` or `Rollup`. It is also compatible with `esbuild`. The output can be published on NPM and other packages can use it. Kubernate also supports `yarn pnp` and works well with `yarn link` and `yarn workspaces`, so you can finally mono-repo your infra as code :)
+You can use Kubernate in any node (>=14.x) runtime, you can use `ts-node` to run the program or you can use `tsc` to compile the program to JavaScript and then run it with node. You can even bundle the project using something like `Webpack` or `Rollup`. It is also compatible with `esbuild`. The output can be published on NPM and other packages can use it. Kubernate also supports `yarn pnp` and works well with `yarn link` and `yarn workspaces`, so you can finally mono-repo your infra as code :)
 
 A kubernate script can also be run using the `kubernate` command. You can define scripts in the [`.kubernaterc`](/basics/kubernaterc) file and then run them with `kubernate <script-name>` while in the project directory. Every script **must** export a **default** function that must return a `Promise`. Checkout [this](/getting-started.html#explore-the-created-project) for an example.
 

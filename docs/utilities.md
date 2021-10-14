@@ -31,7 +31,7 @@ log.fatal("hi", {a: [1, 2]});
 
 ### Definition<T>
 
-The `Definition` generic can be used to retreive a type definition from the name of the type. This is useful when you want to pass parameters or return values between functions and you want them to be typed.
+The `Definition` generic can be used to retrieve a type definition from the name of the type. This is useful when you want to pass parameters or return values between functions and you want them to be typed.
 
 ```typescript
 import {Definition} from "kubernate";
