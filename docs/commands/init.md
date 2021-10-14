@@ -23,7 +23,7 @@ Options:
   -p, --path             the path to the project (defaults to the $CWd/name)
                                                                         [string]
   -t, --template         the name of the source template
-     [string] [required] [choices: "basic", "with-resources"] [default: "basic"]
+     [string] [required] [choices: "basic", "with-resources", "blank"] [default: "basic"]
   -m, --package-manager  the package manager to use
                                        [choices: "npm", "yarn"] [default: "npm"]
 ```

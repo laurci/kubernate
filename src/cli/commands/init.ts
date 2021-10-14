@@ -28,7 +28,7 @@ export const initCommand = (yargs: typeof Yargs) => {
                     alias: "t",
                     description: "the name of the source template",
                     type: "string",
-                    choices: ["basic", "with-resources"],
+                    choices: ["basic", "with-resources", "blank"],
                     default: "basic",
                     required: true,
                 })
