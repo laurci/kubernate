@@ -1,12 +1,12 @@
 ---
 layout: default
 title: Kubernetes CRDs
-nav_order: 9
+nav_order: 11
 ---
 
 ## Kubernetes CRDs
 
-Kubernate supports resources that are not defined in the Kubernetes API but specified using a custom resource definition (CRD). Is generates all the glue code needed to use the CRD. The only requirement is a pointer to the CRD definition (as yaml, not as a resource in a cluster).
+Kubernate supports resources that are not defined in the Kubernetes API but specified using a custom resource definition (CRD). It generates all the glue code needed to use the CRD. The only requirement is a pointer to the CRD definition (as yaml, not as a resource in a cluster).
 
 You can configure the CRD generator to generate a CRD for a specific group. You can follow [this](/basics/kubernaterc.html#crds-generation) guide on the configuration.
 
