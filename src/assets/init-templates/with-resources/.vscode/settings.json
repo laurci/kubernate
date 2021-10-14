@@ -1,7 +1,7 @@
 {
     "yaml.schemas": {
         "node_modules/kubernate/schemas/config.json": ".kubernaterc.yaml",
-        "schemas/resources.json": "[!output]**/[!.kubernaterc]*.yaml"
+        "schemas/resources.json": "input/**.yaml"
     },
     "files.exclude": {
         "**/.git": true,
