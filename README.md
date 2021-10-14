@@ -10,7 +10,7 @@ The official package is available on [NPM](https://npmjs.org/kubernate) but also
 
 Right? Maybe we aren't on the same page. I am not bringing a new concept to the table, but I am bringing a new perspective. Why exactly is Helm so bad?
 
-The problem is not in Helm, but in the way Helm is used. Let's zoom out a bit. People used to create folders with YAMLs inside and just `kubectl apply`. When there was a need for any kind of automation, they started using `sed`, `awk`, `grep` and friends to manipulate was was basically just a text file. You can imagine, stuff got out of hand pretty quick.
+The problem is not in Helm, but in the way Helm is used. Let's zoom out a bit. People used to create folders with YAMLs inside and just `kubectl apply`. When there was a need for any kind of automation, they started using `sed`, `awk`, `grep` and friends to manipulate what was basically just a text file. You can imagine, stuff got out of hand pretty quick.
 
 Helm solves this using `charts`. A chart is a collection of Kubernetes resources that can be deployed as a single unit. The trick is that those resources are also templated. Helm uses a template engine to generate the YAMLs and then applies them to the cluster.
 
