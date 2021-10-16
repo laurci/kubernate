@@ -20,7 +20,7 @@ npm install -g kubernate
 
 Done :).
 
-Yarn may also be used. Kubernate has to be installed globally for code completion ([here](/setup) is how to setup that) to work and to be able to use the `kubernate init` command, for eveything else, the binary that is shipped with the library can be used.
+Yarn may also be used. Kubernate has to be installed globally for code completion ([here](/setup) is how to setup that) to work and to be able to use the `kubernate init` command, for everything else, the binary that is shipped with the library can be used.
 
 ### Creating a Kubernate project
 
@@ -61,7 +61,7 @@ export default async () => {
 };
 ```
 
-Every Kuerbnate needs to have a default export, which is the main function (must be **async**) that Kubernate will run. The whole program is contained in this function (you can call external functions from here, even from different files).
+Every Kubernate script needs to have a default export, which is the main function (must be **async**) that Kubernate will run. The whole program is contained in this function (you can call external functions from here, even from different files).
 
 Let's take a look inside this function.
 
@@ -174,4 +174,4 @@ spec:
 
 ### The finish line
 
-You dit it! That was easy, wasn't it? You can continue by reading some of the basics [here](/basics).
+You did it! That was easy, wasn't it? You can continue by reading some of the basics [here](/basics).
