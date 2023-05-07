@@ -1,6 +1,12 @@
 size: medium
 description: | 
-  Generate valid Kubernetes YAML using imperative, type-safe code. Think about it like Helm but with actual code. This is a specific implementation of **Infrastructure as Code** that targets only Kubernetes. Using generic IaC tools (Terraform, Pulumi, AWS CDK, etc.) has a terrible impact on the performance and reliability of deployments because we try to replicate the K8S state in external systems and the sync will break, sooner or later. 
+  If you're looking for a way to generate valid Kubernetes YAML, you might want to consider using an imperative, type-safe approach. Instead of using a templating language like Helm or writing YAML files manually, you can write actual code that generates the YAML for you. This approach is a specific implementation of **Infrastructure as Code**, with a focus solely on Kubernetes.
+
+  While generic IaC tools like Terraform, Pulumi, and AWS CDK can certainly be used to deploy Kubernetes resources, there are some potential drawbacks to consider. One of the biggest risks is that these tools might not be optimized for Kubernetes, which can lead to performance and reliability issues. For example, when using a generic tool to deploy Kubernetes resources, you might run into synchronization issues sooner or later. This is because the generic tool will try to replicate the state of Kubernetes in external systems, which can lead to synchronization issues.
+
+  On the other hand, by using an approach that is tailored specifically to Kubernetes, you can avoid these potential issues and ensure that your deployments are as reliable and performant as possible. With an imperative, type-safe approach, you can write code that generates the exact Kubernetes resources that you need, with all the necessary metadata and configuration options. This approach can also help you catch errors earlier in the development process, since you're writing code instead of manually editing YAML files.
+
+  Overall, if you're looking for a more efficient and reliable way to generate Kubernetes YAML, an imperative, type-safe approach is definitely worth considering.
 tags:
   - DevOps
   - infrastructure
