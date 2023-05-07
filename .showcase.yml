@@ -1,6 +1,6 @@
 size: medium
 description: | 
-  Generate valid Kubernetes YAML using imperative, type-safe code. Think about it like Helm but with actual code. This is a specific implementation of *Infrastructure as Code* that targets only Kubernetes. Using generic IaC tools (Terraform, Pulumi, AWS CDK, etc.) has a terrible impact on the performance and reliability of deployments because we try to replicate the K8S state in external systems and the sync will break, sooner or later. 
+  Generate valid Kubernetes YAML using imperative, type-safe code. Think about it like Helm but with actual code. This is a specific implementation of **Infrastructure as Code** that targets only Kubernetes. Using generic IaC tools (Terraform, Pulumi, AWS CDK, etc.) has a terrible impact on the performance and reliability of deployments because we try to replicate the K8S state in external systems and the sync will break, sooner or later. 
 tags:
   - DevOps
   - infrastructure
